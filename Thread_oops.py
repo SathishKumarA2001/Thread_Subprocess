@@ -15,7 +15,7 @@ class Process(Thread):
     def run(self):
             print("\n",current_thread(),addr[0])
             #presentation layer
-            conn.send("Welcome to Suckers show type what you want to say: \n".encode())
+            conn.send("Welcome to Programmers show, type what you want to say: \n".encode())
             #print the messages from client using with list 
             stack = []
             while True:
@@ -43,8 +43,14 @@ class Process(Thread):
                                 str+=i
                             return str
                         stack_part = listtostr(stack_part)
-                        print(stack_part)
-                        break
+                        #Firewall #Don't allow more than 10 characters..
+                        if len(stack_part) > 10:
+                            print("Machine overloaded by {}...".format(addr[0]))
+                            msg = "Don't overload the server"
+                            conn.send(msg.encode())
+                        else:
+                            print(stack_part)
+                        stack.clear()
                     break
 
 
